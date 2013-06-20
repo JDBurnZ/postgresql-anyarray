@@ -5,6 +5,7 @@ A PostgreSQL extension adding highly desirable array-based functionality, indepe
 
 <h3>Operators and Procedures</h3>
 
+<small><small>
 <table><tbody>
 <tr><th>Operator</th><th>Method</th><th>Arguments</th><th>Returns</th><th>Description</th></tr>
 <tr><td>#</td><td>anyarray_count</td><td>anyarray</td><td>integer</td><td>Returns number of values in array</td></tr>
@@ -31,8 +32,11 @@ A PostgreSQL extension adding highly desirable array-based functionality, indepe
 <tr><td>%</td><td>anyarray_segment_size</td><td>anyarray, integer</td><td>anyarray[]</td><td>Returns array of arrays from left, each containing max of number defined by right</td></tr>
 <tr><td>/</td><td>anyarray_segment_number</td><td>anyarray, integer</td><td>anyarray[]</td><td>Returns array of arrays from left, broken up into number defined by right</td></tr>
 </tbody></table>
+</small></small>
 
 <h3>Usage Examples</h3>
+
+<small><small>
 <table><tbody>
 <tr><th>Operator</th><th>Example</th><th>Result</th></tr>
 <tr><td>#</td><td># ARRAY['one','two','three']</td><td>3</td></tr>
@@ -81,3 +85,4 @@ A PostgreSQL extension adding highly desirable array-based functionality, indepe
 <tr><td>%</td><td>ARRAY['cat','dog','cow','duck','sheep'] % 2</td><td>ARRAY[ARRAY['cat','dog'],ARRAY['cow','duck'],ARRAY['sheep']]</td></tr>
 <tr><td>/</td><td>ARRAY['cat','dog','cow','duck','sheep'] / 2</td><td>ARRAY[ARRAY['cat','dog','cow'],ARRAY['duck','sheep']]</td></tr>
 </tbody></table>
+</small></small>

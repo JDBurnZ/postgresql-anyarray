@@ -1,7 +1,14 @@
 anyarray
 ========
 
-A PostgreSQL extension adding highly desirable array-based functionality, independend of data-type.
+A PostgreSQL extension adding highly desirable array-based functionality. Contains common comparison, count and segmentation operations, which work across all data types.
+
+Inspired by intarray's lack of functionality for any other data type than int.
+
+Please note this project is still in the planning stages so we're open to suggestions, opinions, additions, modification of naming conventions, etc.
+
+An example of the "-" operator's implementation can be seen here:
+http://www.youlikeprogramming.com/2013/06/removing-values-from-a-postgresql-array/
 
 <h3>Operators and Procedures</h3>
 

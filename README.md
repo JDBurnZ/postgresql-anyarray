@@ -1,91 +1,58 @@
 anyarray
 ========
 
-A PostgreSQL extension adding highly desirable array-based functionality. Contains common comparison, count and segmentation operations, which work across all data types.
+A set of PostgeSQL functions adding highly desirable, data-type independant array functionality.
 
-Inspired by intarray's lack of functionality for any other data type than int.
+Inspired by intarray's complete disregard for all non-integer data-types.
 
-Please note this project is still in the planning stages so we're open to suggestions, opinions, additions, modification of naming conventions, etc.
-
-An example of the "-" operator's implementation can be seen here:
-http://www.youlikeprogramming.com/2013/06/removing-values-from-a-postgresql-array/
-
-<h3>Operators and Procedures</h3>
+<h3>Procedures</h3>
 
 <table><tbody>
-<tr><th>Operator</th><th>Method</th><th>Arguments</th><th>Returns</th><th>Description</th></tr>
-<tr><td>#</td><td>anyarray_count</td><td>anyarray</td><td>integer</td><td>Returns number of values in array</td></tr>
-<tr><td>#&</td><td>anyarray_count_overlap</td><td>anyarray, anyarray</td><td>integer</td><td>Returns number of values which overlap between left and right</td></tr>
-<tr><td>#!</td><td>anyarray_count_diff</td><td>anyarray, anyarray</td><td>integer</td><td>Returns number of values which don't overlap between left and right</td></tr>
-<tr><td>#<</td><td>anyarray_count_diff_lr</td><td>anyarray, anyarray</td><td>integer</td><td>Returns number of values in left which don't overlap with right</td></tr>
-<tr><td>>#</td><td>anyarray_count_diff_rl</td><td>anyarray, anyarray</td><td>integer</td><td>Returns number of values in right which don't overlap with left</td></tr>
-<tr><td>@<</td><td>anyarray_logic_all_lr</td><td>anyarray, anyarray</td><td>boolean</td><td>Returns whether every value in left is contained by right</td></tr>
-<tr><td>>@</td><td>anyarray_logic_all_rl</td><td>anyarray, anyarray</td><td>boolean</td><td>Returns whether every value in right is contained by left</td></tr>
-<tr><td>?</td><td>anyarray_logic_any</td><td>anyarray, anyarray</td><td>boolean</td><td>Returns whether values overlap between left and right</td></tr>
-<tr><td>&</td><td>anyarray_intersect</td><td>anyarray, anyarray</td><td>anyarray</td><td>Returns values which intersect between left and right</td></tr>
-<tr><td>!<</td><td>anyarray_diff_right</td><td>anyarray, anyarray</td><td>anyarray</td><td>Returns values in left which aren't in right</td></tr>
-<tr><td>>!</td><td>anyarray_diff_left</td><td>anyarray, anyarray</td><td>anyarray</td><td>Returns values in right which aren't in left</td></tr>
-<tr><td>!</td><td>anyarray_diff</td><td>anyarray, anyarray</td><td>anyarray</td><td>Returns values which left doesn't contain in right and vice versa</td></tr>
-<tr><td>==</td><td>anyarray_eq</td><td>anyarray, anyarray</td><td>boolean</td><td>Returns whether left and right contain the same values, same size, same order</td></tr>
-<tr><td>=~</td><td>anyarray_eq_unord</td><td>anyarray, anyarray</td><td>boolean</td><td>Returns whether left and right contain same values, same size, order may differ</td></tr>
-<tr><td>=#</td><td>anyarray_eq_uniq</td><td>anyarray, anyarray</td><td>boolean</td><td>Returns whether left and right contain same unique values, size may differ, same order</td></tr>
-<tr><td>=?</td><td>anyarray_eq_uniq_unord</td><td>anyarray, anyarray</td><td>boolean</td><td>Returns whether left and right contain same unique values, size may differ, order may differ</td></tr>
-<tr><td>+, +<</td><td>anyarray_append</td><td>anyarray, anyarray</td><td>anyarray</td><td>Returns left with right appended to the end</td></tr>
-<tr><td>>+</td><td>anyarray_prepend</td><td>anyarray, anyarray</td><td>anyarray</td><td>Returns right with left appended to the end</td></tr>
-<tr><td>-</td><td>anyarray_remove</td><td>anyarray, anyarray</td><td>anyarray</td><td>Returns left with every ocurrance of right removed</td></tr>
-<tr><td>-<</td><td>anyarray_remove_first</td><td>anyarray, anyarray</td><td>anyarray</td><td>Returns left with only first ocurrance of right removed</td></tr>
-<tr><td>>-</td><td>anyarray_remove_last</td><td>anyarray, anyarray</td><td>anyarray</td><td>Returns left with only last ocurrance of right removed</td></tr>
-<tr><td>%</td><td>anyarray_segment_size</td><td>anyarray, integer</td><td>anyarray[]</td><td>Returns array of arrays from left, each containing max of number defined by right</td></tr>
-<tr><td>/</td><td>anyarray_segment_number</td><td>anyarray, integer</td><td>anyarray[]</td><td>Returns array of arrays from left, broken up into number defined by right</td></tr>
+<tr><th>Method</th><th>Returns</th><th>Description</th></tr>
+<tr><td>anyarray_concat(anyarray, anyarray)</td><td>anyarray</td><td>Returns the first argument with values from the second argument appended to it.</td></tr>
+<tr><td>anyarray_concat(anyarray, anynonarray)</td><td>anyarray</td><td>Returns the first argument with the second argument appended appended to it.</td></tr>
+<tr><td>anyarray_concat_uniq(anyarray, anyarray)</td><td>anyarray</td><td>Returns the first argument with values from the second argument (which are not in the first argument) appended to it.</td></tr>
+<tr><td>anyarray_concat_uniq(anyarray, anynonarray)</td><td>anyarray</td>Returns the first argument with the second argument appended to it, if the second argument isn't in the first argument.<td></td></tr>
+<tr><td>anyarray_diff(anyarray, anyarray)</td><td>anyarray</td><td>Returns an array of every element which is not common between arrays.</td></tr>
+<tr><td>anyarray_diff_uniq(anyarray, anyarray)</td><td>anyarray</td><td>Returns an array of every unique value which is not common between arrays.</td></tr>
+<tr><td>anyarray_is_array(anyelement)</td><td>boolean</td><td>Determines whether or not the argument passed is an array.</td></tr>
+<tr><td>anyarray_ranges(anyarray)</td><td>text[]</td><td>Converts an array of values into ranges. Currently only supports smalling, integer and bigint.</td></tr>
+<tr><td>anyarray_remove(anyarray, anyarray)</td><td>anyarray</td><td>Returns the first argument with all values from the second argument removed from it.</td></tr>
+<tr><td>anyarray_remove(anyarray, anynonarray)</td><td>anyarray</td><td>Returns the first argument with all values matching the second argument removed from it.</td></tr>
+<tr><td>anyarray_sort(anyarray)</td><td>anyarray</td><td>Returns the array, sorted.</td></tr>
+<tr><td>anyarray_uniq(anyarray)</td><td>anyarray</td><td>Returns an array of unique values present within the array passed.</td></tr>
 </tbody></table>
 
 <h3>Usage Examples</h3>
 
 <table><tbody>
-<tr><th>Operator</th><th>Example</th><th>Result</th></tr>
-<tr><td>#</td><td># ARRAY['one','two','three']</td><td>3</td></tr>
-<tr><td>#&</td><td>ARRAY['pig','cat','dog'] #& ARRAY['dog','cat','cow','duck']</td><td>2</td></tr>
-<tr><td>#!</td><td>ARRAY['pig','cat','dog'] #! ARRAY['dog','cat','cow','duck']</td><td>3</td></tr>
-<tr><td>#&lt;</td><td>ARRAY['pig','cat','dog'] #&lt; ARRAY['dog','cat','cow','duck']</td><td>1</td></tr>
-<tr><td>&gt;#</td><td>ARRAY['pig','cat','dog'] &gt;# ARRAY['dog','cat','cow','duck']</td><td>2</td></tr>
-<tr><td>@&lt;</td><td>ARRAY['pig','cat','dog'] @&lt; ARRAY['dog','cat','cow','duck']</td><td>FALSE</td></tr>
-<tr><td>@&lt;</td><td>ARRAY['cat','dog'] @&lt; ARRAY['dog','cat','cow','duck']</td><td>TRUE</td></tr>
-<tr><td>@&lt;</td><td>ARRAY['dog','cat','cow','duck'] @&lt; ARRAY['cat','dog']</td><td>FALSE</td></tr>
-<tr><td>@&lt;</td><td>ARRAY['dog','cat'] @&lt; ARRAY['cow','duck']</td><td>FALSE</td></tr>
-<tr><td>&gt;@</td><td>ARRAY['pig','cat','dog'] &gt;@ ARRAY['dog','cat','cow','duck']</td><td>FALSE</td></tr>
-<tr><td>&gt;@</td><td>ARRAY['cat','dog'] &gt;@ ARRAY['dog','cat','cow','duck']</td><td>FALSE</td></tr>
-<tr><td>&gt;@</td><td>ARRAY['dog','cat','cow','duck'] &gt;@ ARRAY['cat','dog']</td><td>TRUE</td></tr>
-<tr><td>&gt;@</td><td>ARRAY['dog','cat'] &gt;@ ARRAY['cow','duck']</td><td>FALSE</td></tr>
-<tr><td>?</td><td>ARRAY['pig','cat','dog'] ? ARRAY['dog','cat','cow','duck']</td><td>TRUE</td></tr>
-<tr><td>?</td><td>ARRAY['cat','dog'] ? ARRAY['dog','cat','cow','duck']</td><td>TRUE</td></tr>
-<tr><td>?</td><td>ARRAY['dog','cat','cow','duck'] ? ARRAY['cat','dog']</td><td>TRUE</td></tr>
-<tr><td>?</td><td>ARRAY['dog','cat'] ? ARRAY['cow','duck']</td><td>FALSE</td></tr>
-<tr><td>&</td><td>ARRAY['pig','cat','dog'] & ARRAY['dog','cat','cow','duck']</td><td>ARRAY['dog','cat']</td></tr>
-<tr><td>!&lt;</td><td>ARRAY['pig','cat','dog'] !&lt; ARRAY['dog','cat','cow','duck']</td><td>ARRAY['pig']</td></tr>
-<tr><td>&gt;!</td><td>ARRAY['pig','cat','dog'] &gt;! ARRAY['dog','cat','cow','duck']</td><td>ARRAY['cow','duck']</td></tr>
-<tr><td>!</td><td>ARRAY['pig','cat','dog'] &gt;! ARRAY['dog','cat','cow','duck']</td><td>ARRAY['pig','cow','duck']</td></tr>
-<tr><td>==</td><td>ARRAY['dog','cat'] == ARRAY['dog','cat']</td><td>TRUE</td></tr>
-<tr><td>==</td><td>ARRAY['dog','cat'] == ARRAY['cat','dog']</td><td>FALSE</td></tr>
-<tr><td>==</td><td>ARRAY['dog','dog','cat','cat'] == ARRAY['dog','cat','cat','cat']</td><td>FALSE</td></tr>
-<tr><td>==</td><td>ARRAY['dog','cat','dog'] == ARRAY['cat','dog','cat','dog']</td><td>FALSE</td></tr>
-<tr><td>=~</td><td>ARRAY['dog','cat'] =~ ARRAY['dog','cat']</td><td>TRUE</td></tr>
-<tr><td>=~</td><td>ARRAY['dog','cat'] =~ ARRAY['cat','dog']</td><td>TRUE</td></tr>
-<tr><td>=~</td><td>ARRAY['dog','dog','cat','cat'] =~ ARRAY['dog','cat','cat','cat']</td><td>FALSE</td></tr>
-<tr><td>=~</td><td>ARRAY['dog','cat','dog'] =~ ARRAY['cat','dog','cat','dog']</td><td>FALSE</td></tr>
-<tr><td>=#</td><td>ARRAY['dog','cat'] =# ARRAY['dog','cat']</td><td>TRUE</td></tr>
-<tr><td>=#</td><td>ARRAY['dog','cat'] =# ARRAY['cat','dog']</td><td>FALSE</td></tr>
-<tr><td>=#</td><td>ARRAY['dog','dog','cat','cat'] =# ARRAY['dog','cat','cat','cat']</td><td>TRUE</td></tr>
-<tr><td>=#</td><td>ARRAY['dog','cat','dog'] =# ARRAY['cat','dog','cat','dog']</td><td>FALSE</td></tr>
-<tr><td>=?</td><td>ARRAY['dog','cat'] =? ARRAY['dog','cat']</td><td>TRUE</td></tr>
-<tr><td>=?</td><td>ARRAY['dog','cat'] =? ARRAY['cat','dog']</td><td>TRUE</td></tr>
-<tr><td>=?</td><td>ARRAY['dog','dog','cat','cat'] =? ARRAY['dog','cat','cat','cat']</td><td>TRUE</td></tr>
-<tr><td>=?</td><td>ARRAY['dog','cat','dog'] =? ARRAY['cat','dog','cat','dog']</td><td>TRUE</td></tr>
-<tr><td>+, +&lt;</td><td>ARRAY['dot','cat'] + ARRAY['cow']</td><td>ARRAY['dog','cat','cow']</td></tr>
-<tr><td>&gt;+</td><td>ARRAY['dot','cat'] &gt;+ ARRAY['cow']</td><td>ARRAY['cow','dog','cat']</td></tr>
-<tr><td>-</td><td>ARRAY['dog','cat','dog','cat'] - ARRAY['dog']</td><td>ARRAY['cat','cat']</td></tr>
-<tr><td>-</td><td>ARRAY['dog','cat','dog','cow'] - ARRAY['dog','cat','duck']</td><td>ARRAY['cow']</td></tr>
-<tr><td>-&lt;</td><td>ARRAY['dog','cat','dog','cat'] - ARRAY['dog']</td><td>ARRAY['cat','dog','cat']</td></tr>
-<tr><td>&gt;-</td><td>ARRAY['dog','cat','dog','cat'] - ARRAY['dog']</td><td>ARRAY['dog','cat','cat']</td></tr>
-<tr><td>%</td><td>ARRAY['cat','dog','cow','duck','sheep'] % 2</td><td>ARRAY[ARRAY['cat','dog'],ARRAY['cow','duck'],ARRAY['sheep']]</td></tr>
-<tr><td>/</td><td>ARRAY['cat','dog','cow','duck','sheep'] / 2</td><td>ARRAY[ARRAY['cat','dog','cow'],ARRAY['duck','sheep']]</td></tr>
+<tr><th>Query</th></th>Return Data-Type</th><th>Returns</th></tr>
+<tr><td>anyarray_concat(ARRAY[1, 2], ARRAY[2, 3])</td><td>ARRAY[1, 2, 2, 3]</td></tr>
+<tr><td>anyarray_concat(ARRAY['one', 'two'], ARRAY['two', 'three'])</td><td>ARRAY['one', 'two', 'two', 'three']</td></tr>
+<tr><td>anyarray_concat(ARRAY[1, 2], 2)</td><td>ARRAY[1]</td></tr>
+<tr><td>anyarray_concat(ARRAY['one', 'two'], 'two')</td><td>ARRAY['one']</td></tr>
+<tr><td>anyarray_concat_uniq(ARRAY[1, 2], ARRAY[2, 3])</td><td>ARRAY[1, 2, 3]</td></tr>
+<tr><td>anyarray_concat_uniq(ARRAY['one', 'two'], ARRAY['two', 'three'])</td><td>ARRAY['one', 'two', 'three']</td></tr>
+<tr><td>anyarray_concat_uniq(ARRAY[1, 2], 2)</td><td>ARRAY[1, 2]</td></tr>
+<tr><td>anyarray_concat_uniq(ARRAY[1, 2], 3)</td><td>ARRAY[1, 2, 3]</td></tr>
+<tr><td>anyarray_concat_uniq(ARRAY['one', 'two'], 'two')</td><td>ARRAY['one', 'two']</td></tr>
+<tr><td>anyarray_concat_uniq(ARRAY['one', 'two'], 'three')</td><td>ARRAY['one', 'two', three']</td></tr>
+<tr><td>anyarray_diff(ARRAY[1, 1, 2], ARRAY[2, 3, 4, 4])</td><td>ARRAY[1, 1, 3, 4, 4]</td></tr>
+<tr><td>anyarray_diff(ARRAY['one', 'one, 'two'], ARRAY['two', 'three', 'four', 'four])</td><td>ARRAY['one', 'one', 'three', 'four', four']</td></tr>
+<tr><td>anyarray_diff_uniq(ARRAY[1, 1, 2], ARRAY[2, 3, 4, 4])</td><td>ARRAY[1, 3, 4]</td></tr>
+<tr><td>anyarray_diff_uniq(ARRAY['one', 'one', 'two'], ARRAY['two', 'three', 'four', 'four'])</td><td>ARRAY('one', 'three', 'four']</td></tr>
+<tr><td>anyarray_is_array(ARRAY[1, 2])</td><td>TRUE</td></tr>
+<tr><td>anyarray_is_array(ARRAY['one', 'two'])</td><td>TRUE</td></tr>
+<tr><td>anyarray_is_array(1)</td><td>FALSE</td></tr>
+<tr><td>anyarray_is_array('one'::text)</td><td>FALSE</td></tr>
+<tr><td>anyarray_ranges(ARRAY[1, 2, 4, 5, 6, 9])</td><td>ARRAY['1-2', '4-6', '9']</td></tr>
+<tr><td>anyarray_remove(ARRAY[1, 2], ARRAY[2, 3])</td><td>ARRAY[1]</td></tr>
+<tr><td>anyarray_remove(ARRAY['one', 'two'], ARRAY['two', 'three'])</td><td>ARRAY['one']</td></tr>
+<tr><td>anyarray_remove(ARRAY[1, 2], 2)</td><td>ARRAY[1]</td></tr>
+<tr><td>anyarray_remove(ARRAY['one', 'two'], 'one')</td><td>ARRAY['one']</td></tr>
+<tr><td>anyarray_sort(ARRAY[1, 46, 15, 3])</td><td>ARRAY[1, 3, 15, 46]</td></tr>
+<tr><td>anyarray_sort(ARRAY['1', '46', '15', '3'])</td><td>ARRAY['1', '15', '3', '46']</td></tr>
+<tr><td>anyarray_sort(ARRAY['one' 'forty-six', 'fifteen', 'three'])</td><td>ARRAY['fifteen', 'forty-six', 'one', 'three']</td></tr>
+<tr><td>anyarray_uniq(ARRAY[1, 2, 3, 2, 1)</td><td>ARRAY[1, 3, 2]</td></tr>
+<tr><td>anyarray_uniq(ARRAY['one', 'two', 'three', 'two', 'one'])</td><td>ARRAY['one', 'three', 'two']</td></tr>
 </tbody></table>

@@ -8,7 +8,7 @@ $BODY$
 		FROM
 			(
 				SELECT
-					UNNEST(array_vals_to_sort) AS val
+					UNNEST(with_array) AS val
 				ORDER BY
 					val
 			) AS sorted_vals

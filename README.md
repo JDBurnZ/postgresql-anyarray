@@ -50,8 +50,8 @@ Inspired by intarray's complete disregard for all non-integer data-types.
 <tr><td>anyarray_remove(ARRAY[1, 2], ARRAY[2, 3])</td><td>integer[]</td><td>{1}</td></tr>
 <tr><td>anyarray_remove(ARRAY['one', 'two'], ARRAY['two', 'three'])</td><td>text[]</td><td>{one}</td></tr>
 <tr><td>anyarray_remove(ARRAY[1, 2], 2)</td><td>integer[]</td><td>{1}</td></tr>
-<tr><td>anyarray_remove(ARRAY['one', 'two'], 'two'::text)</td><td>{one}</td></tr>
-<tr><td>anyarray_sort(ARRAY[1, 46, 15, 3])</td><td>integer[]</td><td>text[]</td><td>{1,3,15,46}</td></tr>
+<tr><td>anyarray_remove(ARRAY['one', 'two'], 'two'::text)</td><td>text[]</td><td>{one}</td></tr>
+<tr><td>anyarray_sort(ARRAY[1, 46, 15, 3])</td><td>integer[]</td><td>{1,3,15,46}</td></tr>
 <tr><td>anyarray_sort(ARRAY['1', '46', '15', '3'])</td><td>integer[]</td><td>{1,15,3,46}</td></tr>
 <tr><td>anyarray_sort(ARRAY['one', 'forty-six', 'fifteen', 'three'])</td><td>text[]</td><td>{fifteen,forty-six,one,three}</td></tr>
 <tr><td>anyarray_uniq(ARRAY[1, 2, 3, 2, 1])</td><td>integer[]</td><td>{1,2,3}</td></tr>

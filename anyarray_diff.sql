@@ -7,7 +7,7 @@ $BODY$
 		loop_offset integer;
 		
 		-- The array to be returned by this function.
-		return_array with_array%TYPE;
+		return_array with_array%TYPE := '{}'
 	BEGIN
 		IF with_array IS NULL THEN
 			RETURN against_array;

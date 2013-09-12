@@ -14,7 +14,7 @@ $BODY$
 	EXCEPTION WHEN
 	      SQLSTATE '42804' -- Unknown data-type passed
 	      OR SQLSTATE '42883' -- Function doesn't exist
-	      OR SQLSTATE '42883' -- Unable to cast to an array
+	      OR SQLSTATE '22P02' -- Unable to cast to an array
 	THEN
 		RETURN FALSE;
 	END;

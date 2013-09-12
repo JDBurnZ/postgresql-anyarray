@@ -7,7 +7,7 @@ $BODY$
 		loop_offset integer;
 
 		-- The array to be returned by this function.
-		return_array with_array%TYPE;
+		return_array with_array%TYPE := '{}';
 	BEGIN
 		IF with_array IS NULL THEN
 			return NULL;
@@ -16,7 +16,7 @@ $BODY$
 		-- Iterate over each element in "concat_array".
 		FOR loop_offset IN ARRAY_LOWER(with_array, 1)..ARRAY_UPPER(with_array, 1) LOOP
 			IF NOT with_array[loop_offset] = ANY(return_array) THEN
-			return_array = ARRAY_APPEND(return_array, with_array[loop_offset]);
+				return_array = ARRAY_APPEND(return_array, with_array[loop_offset]);
 			END IF;
 		END LOOP;
 

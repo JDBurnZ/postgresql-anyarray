@@ -12,7 +12,7 @@ Inspired by intarray's complete disregard for all non-integer data-types.
 <tr><td>anyarray_concat(anyarray, anyarray)</td><td>anyarray</td><td>Returns the first argument with values from the second argument appended to it.</td></tr>
 <tr><td>anyarray_concat(anyarray, anynonarray)</td><td>anyarray</td><td>Returns the first argument with the second argument appended appended to it.</td></tr>
 <tr><td>anyarray_concat_uniq(anyarray, anyarray)</td><td>anyarray</td><td>Returns the first argument with values from the second argument (which are not in the first argument) appended to it.</td></tr>
-<tr><td>anyarray_concat_uniq(anyarray, anynonarray)</td><td>anyarray</td>Returns the first argument with the second argument appended to it, if the second argument isn't in the first argument.<td></td></tr>
+<tr><td>anyarray_concat_uniq(anyarray, anynonarray)</td><td>anyarray</td><td>Returns the first argument with the second argument appended to it, if the second argument isn't in the first argument.</td></tr>
 <tr><td>anyarray_diff(anyarray, anyarray)</td><td>anyarray</td><td>Returns an array of every element which is not common between arrays.</td></tr>
 <tr><td>anyarray_diff_uniq(anyarray, anyarray)</td><td>anyarray</td><td>Returns an array of every unique value which is not common between arrays.</td></tr>
 <tr><td>anyarray_is_array(anyelement)</td><td>boolean</td><td>Determines whether or not the argument passed is an array.</td></tr>

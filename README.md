@@ -7,8 +7,6 @@ Inspired by intarray's complete disregard for all non-integer data-types.
 
 <h3>Functions</h3>
 
-<small><small>
-<small><small>
 <table><tbody>
 <tr><th>Method</th><th>Returns</th><th>Description</th></tr>
 <tr><td>anyarray_concat(anyarray, anyarray)</td><td>anyarray</td><td>Returns the first argument with values from the second argument appended to it.</td></tr>
@@ -24,13 +22,9 @@ Inspired by intarray's complete disregard for all non-integer data-types.
 <tr><td>anyarray_sort(anyarray)</td><td>anyarray</td><td>Returns the array, sorted.</td></tr>
 <tr><td>anyarray_uniq(anyarray)</td><td>anyarray</td><td>Returns an array of unique values present within the array passed.</td></tr>
 </tbody></table>
-</small></small>
-</small></small>
 
 <h3>Usage Examples</h3>
 
-<small><small>
-<small><small>
 <table><tbody>
 <tr><th>Query</th><th>Return Data-Type</th><th>Returns</th></tr>
 <tr><td>anyarray_concat(ARRAY[1, 2], ARRAY[2, 3])</td><td>integer[]</td><td>{1,2,2,3}</td></tr>
@@ -63,5 +57,3 @@ Inspired by intarray's complete disregard for all non-integer data-types.
 <tr><td>anyarray_uniq(ARRAY[1, 2, 3, 2, 1])</td><td>integer[]</td><td>{1,2,3}</td></tr>
 <tr><td>anyarray_uniq(ARRAY['one', 'two', 'three', 'two', 'one'])</td><td>text[]</td><td>{one,two,three}</td></tr>
 </tbody></table>
-</small></small>
-</small></small>

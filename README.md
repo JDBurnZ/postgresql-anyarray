@@ -39,6 +39,7 @@ functions
 <tr><td>anyarray_ranges(anyarray)</td><td>text[]</td><td>Converts an array of values into ranges. Currently only supports smalling, integer and bigint.</td></tr>
 <tr><td>anyarray_remove(anyarray, anyarray)</td><td>anyarray</td><td>Returns the first argument with all values from the second argument removed from it.</td></tr>
 <tr><td>anyarray_remove(anyarray, anynonarray)</td><td>anyarray</td><td>Returns the first argument with all values matching the second argument removed from it.</td></tr>
+<tr><td>anyarray_remove_null(anyarray)</td><td>anyarray</td><td>Returns an array with all occurrences of NULL omitted.</td></tr>
 <tr><td>anyarray_sort(anyarray)</td><td>anyarray</td><td>Returns the array, sorted.</td></tr>
 <tr><td>anyarray_uniq(anyarray)</td><td>anyarray</td><td>Returns an array of unique values present within the array passed.</td></tr>
 </tbody></table>
@@ -72,6 +73,8 @@ examples
 <tr><td>anyarray_remove(ARRAY['one', 'two'], ARRAY['two', 'three'])</td><td>text[]</td><td>{one}</td></tr>
 <tr><td>anyarray_remove(ARRAY[1, 2], 2)</td><td>integer[]</td><td>{1}</td></tr>
 <tr><td>anyarray_remove(ARRAY['one', 'two'], 'two'::text)</td><td>text[]</td><td>{one}</td></tr>
+<tr><td>anyarray_remove_null(ARRAY[1, 2, NULL, 4])</td><td>integer[]</td><td>{1,2,4}</td></tr>
+<tr><td>anyarray_remove_null(ARRAY['one', 'two', NULL, 'four'])</td><td>text[]</td><td>{one,two,four}</td></tr>
 <tr><td>anyarray_sort(ARRAY[1, 46, 15, 3])</td><td>integer[]</td><td>{1,3,15,46}</td></tr>
 <tr><td>anyarray_sort(ARRAY['1', '46', '15', '3'])</td><td>integer[]</td><td>{1,15,3,46}</td></tr>
 <tr><td>anyarray_sort(ARRAY['one', 'forty-six', 'fifteen', 'three'])</td><td>text[]</td><td>{fifteen,forty-six,one,three}</td></tr>

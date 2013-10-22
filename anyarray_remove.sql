@@ -10,7 +10,7 @@ $BODY$
 		return_array from_array%TYPE;
 	BEGIN
 		-- If either argument is NULL, there is nothing to do.
-		IF NULL IN(from_array, remove_array) THEN
+		IF from_array IS NULL OR remove_array IS NULL THEN
 			RETURN from_array;
 		END IF;
 

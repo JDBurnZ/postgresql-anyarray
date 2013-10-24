@@ -52,42 +52,133 @@ aggregates
 <tr><td>anyarray_agg(anyarray)</td><td>anyarray</td><td>Concatenates arrays into a single array when aggregating.</td></tr>
 </tbody></table>
 
+operators
+---------
+
+Coming Soon!
+
 examples
 --------
 
 <table><tbody>
+
 <tr><th>Query</th><th>Return Data-Type</th><th>Result</th></tr>
-<tr><td>anyarray_concat(ARRAY[1, 2], ARRAY[2, 3])</td><td>integer[]</td><td>{1,2,2,3}</td></tr>
-<tr><td>anyarray_concat(ARRAY['one', 'two'], ARRAY['two', 'three'])</td><td>text[]</td><td>{one,two,two,three}</td></tr>
-<tr><td>anyarray_concat(ARRAY[1, 2], 2)</td><td>integer[]</td><td>{1,2,2}</td></tr>
-<tr><td>anyarray_concat(ARRAY['one', 'two'], 'two'::text)</td><td>text[]</td><td>{one,two,two}</td></tr>
-<tr><td>anyarray_concat_uniq(ARRAY[1, 2], ARRAY[2, 3])</td><td>integer[]</td><td>{1,2,3}</td></tr>
-<tr><td>anyarray_concat_uniq(ARRAY['one', 'two'], ARRAY['two', 'three'])</td><td>text[]</td><td>{one,two,three}</td></tr>
-<tr><td>anyarray_concat_uniq(ARRAY[1, 2], 2)</td><td>integer[]</td><td>{1,2}</td></tr>
-<tr><td>anyarray_concat_uniq(ARRAY[1, 2], 3)</td><td>integer[]</td><td>{1,2,3}</td></tr>
-<tr><td>anyarray_concat_uniq(ARRAY['one', 'two'], 'two'::text)</td><td>text[]</td><td>{one,two}</td></tr>
-<tr><td>anyarray_concat_uniq(ARRAY['one', 'two'], 'three'::text)</td><td>text[]</td><td>{one,two,three}</td></tr>
-<tr><td>anyarray_diff(ARRAY[1, 1, 2], ARRAY[2, 3, 4, 4])</td><td>integer[]</td><td>{1,1,3,4,4}</td></tr>
-<tr><td>anyarray_diff(ARRAY['one', 'one', 'two'], ARRAY['two', 'three', 'four', 'four'])</td><td>text[]</td><td>{one,one,three,four,four}</td></tr>
-<tr><td>anyarray_diff_uniq(ARRAY[1, 1, 2], ARRAY[2, 3, 4, 4])</td><td>integer[]</td><td>{1,3,4}</td></tr>
-<tr><td>anyarray_diff_uniq(ARRAY['one', 'one', 'two'], ARRAY['two', 'three', 'four', 'four'])</td><td>text[]</td><td>{one,three,four}</td></tr>
-<tr><td>anyarray_is_array(ARRAY[1, 2])</td><td>boolean[]</td><td>TRUE</td></tr>
-<tr><td>anyarray_is_array(ARRAY['one', 'two'])</td><td>boolean[]</td><td>TRUE</td></tr>
-<tr><td>anyarray_is_array(1)</td><td>boolean[]</td><td>FALSE</td></tr>
-<tr><td>anyarray_is_array('one'::text)</td><td>boolean[]</td><td>FALSE</td></tr>
-<tr><td>anyarray_ranges(ARRAY[1, 2, 4, 5, 6, 9])</td><td>text[]</td><td>{1-2,4-6,9}</td></tr>
-<tr><td>anyarray_ranges(ARRAY[1.1, 1.2, 2, 3, 5])</td><td>text[]</td><td>{1.1,1.2,2-3,5}</td></tr>
-<tr><td>anyarray_remove(ARRAY[1, 2], ARRAY[2, 3])</td><td>integer[]</td><td>{1}</td></tr>
-<tr><td>anyarray_remove(ARRAY['one', 'two'], ARRAY['two', 'three'])</td><td>text[]</td><td>{one}</td></tr>
-<tr><td>anyarray_remove(ARRAY[1, 2], 2)</td><td>integer[]</td><td>{1}</td></tr>
-<tr><td>anyarray_remove(ARRAY['one', 'two'], 'two'::text)</td><td>text[]</td><td>{one}</td></tr>
-<tr><td>anyarray_remove_null(ARRAY[1, 2, NULL, 4])</td><td>integer[]</td><td>{1,2,4}</td></tr>
-<tr><td>anyarray_remove_null(ARRAY['one', 'two', NULL, 'four'])</td><td>text[]</td><td>{one,two,four}</td></tr>
-<tr><td>anyarray_sort(ARRAY[1, 46, 15, 3])</td><td>integer[]</td><td>{1,3,15,46}</td></tr>
-<tr><td>anyarray_sort(ARRAY['1', '46', '15', '3'])</td><td>integer[]</td><td>{1,15,3,46}</td></tr>
-<tr><td>anyarray_sort(ARRAY['one', 'forty-six', 'fifteen', 'three'])</td><td>text[]</td><td>{fifteen,forty-six,one,three}</td></tr>
-<tr><td>anyarray_uniq(ARRAY[1, 2, 3, 2, 1])</td><td>integer[]</td><td>{1,2,3}</td></tr>
-<tr><td>anyarray_uniq(ARRAY['one', 'two', 'three', 'two', 'one'])</td><td>text[]</td><td>{one,two,three}</td></tr>
+
+<tr><td><pre>anyarray_concat(
+	ARRAY[1, 2],
+	ARRAY[2, 3]
+)</pre></pre></td><td>integer[]</td><td>{1,2,2,3}</td></tr>
+
+<tr><td><pre>anyarray_concat(
+	ARRAY['one', 'two'],
+	ARRAY['two', 'three']
+)</pre></td><td>text[]</td><td>{one,two,two,three}</td></tr>
+
+<tr><td><pre>anyarray_concat(
+	ARRAY[1, 2],
+	2
+)</pre></td><td>integer[]</td><td>{1,2,2}</td></tr>
+
+<tr><td><pre>anyarray_concat(
+	ARRAY['one', 'two'],
+	'two'::text
+)</pre></td><td>text[]</td><td>{one,two,two}</td></tr>
+<tr><td><pre>anyarray_concat_uniq(
+	ARRAY[1, 2],
+	ARRAY[2, 3]
+)</pre></td><td>integer[]</td><td>{1,2,3}</td></tr>
+
+<tr><td><pre>anyarray_concat_uniq(
+	ARRAY['one', 'two'],
+	ARRAY['two', 'three']
+)</pre></td><td>text[]</td><td>{one,two,three}</td></tr>
+
+<tr><td><pre>anyarray_concat_uniq(
+	ARRAY[1, 2],
+	2
+)</pre></td><td>integer[]</td><td>{1,2}</td></tr>
+
+<tr><td><pre>anyarray_concat_uniq(
+	ARRAY[1, 2],
+	3
+)</pre></td><td>integer[]</td><td>{1,2,3}</td></tr>
+
+<tr><td><pre>anyarray_concat_uniq(
+	ARRAY['one', 'two'],
+	'two'::text
+)</pre></td><td>text[]</td><td>{one,two}</td></tr>
+
+<tr><td><pre>anyarray_concat_uniq(
+	ARRAY['one', 'two'],
+	'three'::text
+)</pre></td><td>text[]</td><td>{one,two,three}</td></tr>
+
+<tr><td><pre>anyarray_diff(
+	ARRAY[1, 1, 2],
+	ARRAY[2, 3, 4, 4]
+)</pre></td><td>integer[]</td><td>{1,1,3,4,4}</td></tr>
+
+<tr><td><pre>anyarray_diff(
+	ARRAY['one', 'one', 'two'],
+	ARRAY['two', 'three', 'four', 'four']
+)</pre></td><td>text[]</td><td>{one,one,three,four,four}</td></tr>
+
+<tr><td><pre>anyarray_diff_uniq(
+	ARRAY[1, 1, 2],
+	ARRAY[2, 3, 4, 4]
+)</pre></td><td>integer[]</td><td>{1,3,4}</td></tr>
+
+<tr><td><pre>anyarray_diff_uniq(
+	ARRAY['one', 'one', 'two'],
+	ARRAY['two', 'three', 'four', 'four']
+)</pre></td><td>text[]</td><td>{one,three,four}</td></tr>
+
+<tr><td><pre>anyarray_is_array(ARRAY[1, 2])</pre></td><td>boolean[]</td><td>TRUE</td></tr>
+
+<tr><td><pre>anyarray_is_array(ARRAY['one', 'two'])</pre></td><td>boolean[]</td><td>TRUE</td></tr>
+
+<tr><td><pre>anyarray_is_array(1)</pre></td><td>boolean[]</td><td>FALSE</td></tr>
+
+<tr><td><pre>anyarray_is_array('one'::text)</pre></td><td>boolean[]</td><td>FALSE</td></tr>
+
+<tr><td><pre>anyarray_ranges(ARRAY[1, 2, 4, 5, 6, 9])</pre></td><td>text[]</td><td>{1-2,4-6,9}</td></tr>
+
+<tr><td><pre>anyarray_ranges(ARRAY[1.1, 1.2, 2, 3, 5])</pre></td><td>text[]</td><td>{1.1,1.2,2-3,5}</td></tr>
+
+<tr><td><pre>anyarray_remove(
+	ARRAY[1, 2],
+	ARRAY[2, 3]
+)</pre></td><td>integer[]</td><td>{1}</td></tr>
+
+<tr><td><pre>anyarray_remove(
+	ARRAY['one', 'two'],
+	ARRAY['two', 'three']
+)</pre></td><td>text[]</td><td>{one}</td></tr>
+
+<tr><td><pre>anyarray_remove(
+	ARRAY[1, 2],
+	2
+)</pre></td><td>integer[]</td><td>{1}</td></tr>
+
+<tr><td><pre>anyarray_remove(
+	ARRAY['one', 'two'],
+	'two'::text
+)</pre></td><td>text[]</td><td>{one}</td></tr>
+
+<tr><td><pre>anyarray_remove_null(ARRAY[1, 2, NULL, 4])</pre></td><td>integer[]</td><td>{1,2,4}</td></tr>
+
+<tr><td><pre>anyarray_remove_null(ARRAY['one', 'two', NULL, 'four'])</pre></td><td>text[]</td><td>{one,two,four}</td></tr>
+
+<tr><td><pre>anyarray_sort(ARRAY[1, 46, 15, 3])</pre></td><td>integer[]</td><td>{1,3,15,46}</td></tr>
+
+<tr><td><pre>anyarray_sort(ARRAY['1', '46', '15', '3'])</pre></td><td>integer[]</td><td>{1,15,3,46}</td></tr>
+
+<tr><td><pre>anyarray_sort(ARRAY['one', 'forty-six', 'fifteen', 'three'])</pre></td><td>text[]</td><td>{fifteen,forty-six,one,three}</td></tr>
+
+<tr><td><pre>anyarray_uniq(ARRAY[1, 2, 3, 2, 1])</pre></td><td>integer[]</td><td>{1,2,3}</td></tr>
+
+<tr><td><pre>anyarray_uniq(ARRAY['one', 'two', 'three', 'two', 'one'])</pre></td><td>text[]</td><td>{one,two,three}</td></tr>
+
 <tr><td><pre>SELECT id, anyarray_agg(list)
 FROM (VALUES
 	('a', ARRAY[1,2]),
@@ -96,6 +187,7 @@ FROM (VALUES
 	('b', ARRAY[7,8])
 ) AS data (id, list)
 GROUP BY id</pre></td><td>text, integer[]</td><td>'a', {1,2,3,4}<br/>'b', {5,6,7,8}</td></tr>
+
 <tr><td><pre>SELECT id, anyarray_agg(ARRAY[list])
 FROM (VALUES
 	('a', ARRAY[1,2]),

@@ -29,6 +29,7 @@ functions
 
 <table><tbody>
 <tr><th>Method</th><th>Returns</th><th>Description</th></tr>
+<tr><td>anyarray_agg(anyarray)</td><td>anyarray</td><td>Concatenates arrays into a single array when aggregating.</td></tr>
 <tr><td>anyarray_concat(anyarray, anyarray)</td><td>anyarray</td><td>Returns the first argument with values from the second argument appended to it.</td></tr>
 <tr><td>anyarray_concat(anyarray, anynonarray)</td><td>anyarray</td><td>Returns the first argument with the second argument appended appended to it.</td></tr>
 <tr><td>anyarray_concat_uniq(anyarray, anyarray)</td><td>anyarray</td><td>Returns the first argument with values from the second argument (which are not in the first argument) appended to it.</td></tr>
@@ -49,6 +50,14 @@ examples
 
 <table><tbody>
 <tr><th>Query</th><th>Return Data-Type</th><th>Result</th></tr>
+<tr><td>SELECT id, anyarray_agg(list)
+FROM (VALUES
+	('a', ARRAY[1,2]),
+	('a', ARRAY[3,4]),
+	('b', ARRAY[5,6]),
+	('b', ARRAY[7,8])
+) AS data (id, list)
+GROUP BY id</td><td>text, integer[]</td><td>'a', {1,2,3,4}<br/>'b', {5,6,7,8}</td></tr>
 <tr><td>anyarray_concat(ARRAY[1, 2], ARRAY[2, 3])</td><td>integer[]</td><td>{1,2,2,3}</td></tr>
 <tr><td>anyarray_concat(ARRAY['one', 'two'], ARRAY['two', 'three'])</td><td>text[]</td><td>{one,two,two,three}</td></tr>
 <tr><td>anyarray_concat(ARRAY[1, 2], 2)</td><td>integer[]</td><td>{1,2,2}</td></tr>

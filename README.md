@@ -50,14 +50,14 @@ examples
 
 <table><tbody>
 <tr><th>Query</th><th>Return Data-Type</th><th>Result</th></tr>
-<tr><td><code>SELECT id, anyarray_agg(list)
+<tr><td><pre>SELECT id, anyarray_agg(list)
 FROM (VALUES
 	('a', ARRAY[1,2]),
 	('a', ARRAY[3,4]),
 	('b', ARRAY[5,6]),
 	('b', ARRAY[7,8])
 ) AS data (id, list)
-GROUP BY id</code></td><td>text, integer[]</td><td>'a', {1,2,3,4}<br/>'b', {5,6,7,8}</td></tr>
+GROUP BY id</pre></td><td>text, integer[]</td><td>'a', {1,2,3,4}<br/>'b', {5,6,7,8}</td></tr>
 <tr><td>anyarray_concat(ARRAY[1, 2], ARRAY[2, 3])</td><td>integer[]</td><td>{1,2,2,3}</td></tr>
 <tr><td>anyarray_concat(ARRAY['one', 'two'], ARRAY['two', 'three'])</td><td>text[]</td><td>{one,two,two,three}</td></tr>
 <tr><td>anyarray_concat(ARRAY[1, 2], 2)</td><td>integer[]</td><td>{1,2,2}</td></tr>

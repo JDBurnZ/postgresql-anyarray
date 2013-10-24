@@ -44,6 +44,14 @@ functions
 <tr><td>anyarray_uniq(anyarray)</td><td>anyarray</td><td>Returns an array of unique values present within the array passed.</td></tr>
 </tbody></table>
 
+aggregates
+----------
+
+<table><tbody>
+<tr><th>Method</th><th>Returns</th><th>Description</th></tr>
+<tr><td>anyarray_agg(anyarray)</td><td>anyarray</td><td>Concatenates arrays into a single array when aggregating.</td></tr>
+</tbody></table>
+
 examples
 --------
 
@@ -80,6 +88,22 @@ examples
 <tr><td>anyarray_sort(ARRAY['one', 'forty-six', 'fifteen', 'three'])</td><td>text[]</td><td>{fifteen,forty-six,one,three}</td></tr>
 <tr><td>anyarray_uniq(ARRAY[1, 2, 3, 2, 1])</td><td>integer[]</td><td>{1,2,3}</td></tr>
 <tr><td>anyarray_uniq(ARRAY['one', 'two', 'three', 'two', 'one'])</td><td>text[]</td><td>{one,two,three}</td></tr>
+<tr><td><pre>SELECT id, anyarray_agg(list)
+FROM (VALUES
+	('a', ARRAY[1,2]),
+	('a', ARRAY[3,4]),
+	('b', ARRAY[5,6]),
+	('b', ARRAY[7,8])
+) AS data (id, list)
+GROUP BY id</pre></td><td>text, integer[]</td><td>'a', {1,2,3,4}<br/>'b', {5,6,7,8}</td></tr>
+<tr><td><pre>SELECT id, anyarray_agg(ARRAY[list])
+FROM (VALUES
+	('a', ARRAY[1,2]),
+	('a', ARRAY[3,4]),
+	('b', ARRAY[5,6]),
+	('b', ARRAY[7,8])
+) AS data (id, list)
+GROUP BY id</pre></td><td>text, integer[]</td><td>'a', {{1,2},{3,4}}<br/>'b', {{5,6},{7,8}}</td></tr>
 </tbody></table>
 
 to do

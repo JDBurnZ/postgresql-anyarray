@@ -208,3 +208,7 @@ to do
 * Implement `anyarray_remove_at(anyarray, offset)`: Returns the array passed with the element at `offset` removed. Should offset start at 1 similar to PostgreSQL's array access, or start at 0 (ordinal) like most programming languages use? Leaning toward ordinal, because that would be assumed functionality unless you already have a solid understanding of PostgreSQL arrays.)
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/JDBurnZ/anyarray/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/JDBurnZ/anyarray/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+

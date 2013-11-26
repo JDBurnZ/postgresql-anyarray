@@ -36,6 +36,7 @@ functions
 <tr><td>anyarray_diff(anyarray, anyarray)</td><td>anyarray</td><td>Returns an array of every element which is not common between arrays.</td></tr>
 <tr><td>anyarray_diff_uniq(anyarray, anyarray)</td><td>anyarray</td><td>Returns an array of every unique value which is not common between arrays.</td></tr>
 <tr><td>anyarray_is_array(anyelement)</td><td>boolean</td><td>Determines whether or not the argument passed is an array.</td></tr>
+<tr><td>anyarray_numeric_only(anyarray)</td><td>anyarray</td><td>Returns the array passed with all non-numeric values removed from it. Retains whole and decimal values.</td></tr>
 <tr><td>anyarray_ranges(anyarray)</td><td>text[]</td><td>Converts an array of values into ranges. Currently only supports smalling, integer and bigint.</td></tr>
 <tr><td>anyarray_remove(anyarray, anyarray)</td><td>anyarray</td><td>Returns the first argument with all values from the second argument removed from it.</td></tr>
 <tr><td>anyarray_remove(anyarray, anynonarray)</td><td>anyarray</td><td>Returns the first argument with all values matching the second argument removed from it.</td></tr>

@@ -134,6 +134,14 @@ examples
 	ARRAY['two', 'three', 'four', 'four']
 )</pre></td><td>text[]</td><td><pre>{one,three,four}</pre></td></tr>
 
+<tr><td><pre>SELECT anyarray_numeric_only(
+	ARRAY['1', '1.1', '1.1a', '1.a', 'a']::text[]
+)</pre></td><td>text[]</td><td><pre>{1,1.1}</pre></td></tr>
+
+<tr><td><pre>SELECT anyarray_numeric_only(
+	ARRAY[1, 1.1, 1.1234567890]::numeric[]
+)</pre></td><td>numeric[]</td><td><pre>{1,1.1,1.1234567890}</pre></td></tr>
+
 <tr><td><pre>anyarray_is_array(ARRAY[1, 2])</pre></td><td>boolean[]</td><td><pre>TRUE</pre></td></tr>
 
 <tr><td><pre>anyarray_is_array(ARRAY['one', 'two'])</pre></td><td>boolean[]</td><td><pre>TRUE</pre></td></tr>

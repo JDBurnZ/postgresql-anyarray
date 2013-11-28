@@ -1,48 +1,46 @@
-/*
+DROP FUNCTION IF EXISTS anyarray_map(text, anyarray, anyarray);
+CREATE OR REPLACE FUNCTION
+	anyarray_map
+(
+	function_call text,
+	with_array anyarray,
+	VARIADIC args anyarray DEFAULT ARRAY[NULL]
+)
+RETURNS
+	anyarray
+AS $BODY$
+	DECLARE
+		-- The variable used to track iteration over "with_array".
+		loop_offset integer;
 
-TODO:
+		-- The array to be returned by this function.
+		return_array with_array%TYPE := '{}';
 
-A function which calls the function passed (as a string) on every element within the array. Can optionally include additional arguments.
+		temp_function text;
+	BEGIN
+		-- Iterate over conditional args, inserting them as args into the function to be called.
+		FOR loop_offset IN ARRAY_LOWER(args, 1)..ARRAY_UPPER(args, 1) LOOP
+			-- Format the value of argument being iterated over.
+			function_call = FORMAT(
+				REPLACE(function_call, ('$' || (loop_offset+1)::text), '%1$L'),
+				args[loop_offset]
+			);
+			RAISE NOTICE '%', function_call;
+		END LOOP;
 
-TO DISCUSS:
+		-- Iterate over each element in the array.
+		loop_offset = 0;
+		FOR loop_offset IN ARRAY_LOWER(with_array, 1)..ARRAY_UPPER(with_array, 1) LOOP
+			execute FORMAT(
+				'SELECT ' || REPLACE(function_call, '$1', '%1$L'),
+				with_array[loop_offset]
+			) into temp_function;
+			return_array[loop_offset] = temp_function;
+			--temp_function = REPLACE(function_call, '$1', '%1$L');
+			--RAISE NOTICE '%', tmp_function;
+			--PERFORM '%', tmp_function;
+		END LOOP;
 
-Every `anyarray` function currently in existance always has the subject
-array (the array which the actions will be performed on,) as the first
-argument.
-
-Examples:
-
-ANYARRAY_REMOVE(ARRAY[1,2,3], 1)
-ANYARRAY_CONCAT(ARRAY[1,2,3], [3,4])
-ANYARRAY_SORT(ARRAY[4,2,9])
-
-Should we continue with this formatting in regards to mapping?
-
-Or should we make an exception to argument ordering to make the logic a
-little more clear?
-
-*/
-
--- Both proposals essentially iterate over the array, similarly to:
-
-STRING_TO_ARRAY('a:b', ':') -- {a,b}
-STRING_TO_ARRAY('c:d', ':') -- {c,d}
--- and..
-TRIM(' a ')
-TRIM(' b')
-
--- Proposal #1:
-
-ANYARRAY_MAP('STRING_TO_ARRAY($1, $2)', ARRAY['a:b','c:d'], ':')
-ANYARRAY_MAP('TRIM($1)', ARRAY[' a ',' b'])
-
--- Proposal #2:
-
-ANYARRAY_MAP(ARRAY['a:b','c:d'], 'STRING_TO_ARRAY($1, $2)', ':')
-ANYARRAY_MAP(ARRAY[' a ',' b'], 'TRIM($1)')
-
--- Both would output the following:
-
-{{a,b},{c,d}} -- STRING_TO_ARRAY output
-{a,b} -- TRIM output
-
+		RETURN return_array;
+	END;
+$BODY$ LANGUAGE plpgsql;

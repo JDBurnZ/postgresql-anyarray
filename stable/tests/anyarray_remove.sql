@@ -28,9 +28,3 @@ SELECT
 
 	-- Expected Result: {}
 	ANYARRAY_REMOVE(ARRAY['one','two'], ARRAY['one','two'])
-
-/*
- *
- * TODO: Add tests for other functions.
- *
-*/

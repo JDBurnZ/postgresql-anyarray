@@ -33,6 +33,7 @@ functions
 <tr><td>anyarray_concat_uniq(anyarray, anynonarray)</td><td>anyarray</td><td>Returns the first argument with the second argument appended to it, if the second argument isn't in the first argument.</td></tr>
 <tr><td>anyarray_diff(anyarray, anyarray)</td><td>anyarray</td><td>Returns an array of every element which is not common between arrays.</td></tr>
 <tr><td>anyarray_diff_uniq(anyarray, anyarray)</td><td>anyarray</td><td>Returns an array of every unique value which is not common between arrays.</td></tr>
+<tr><td>anyarray_enumerate(anyarray)</td><td>TABLE (index bigint, value anyelement)</td><td>Unnests the array along with the indices of each element.</td></tr>
 <tr><td>anyarray_is_array(anyelement)</td><td>boolean</td><td>Determines whether or not the argument passed is an array.</td></tr>
 <tr><td>anyarray_numeric_only(anyarray)</td><td>anyarray</td><td>Returns the array passed with all non-numeric values removed from it. Retains whole and decimal values.</td></tr>
 <tr><td>anyarray_ranges(anyarray)</td><td>text[]</td><td>Converts an array of values into ranges. Currently only supports smalling, integer and bigint.</td></tr>
@@ -131,6 +132,35 @@ examples
 	ARRAY['one', 'one', 'two'],
 	ARRAY['two', 'three', 'four', 'four']
 )</pre></td><td>text[]</td><td><pre>{one,three,four}</pre></td></tr>
+
+<tr>
+	<td><pre>SELECT *
+FROM anyarray_enumerate(
+	ARRAY[
+		'foo', 'bar', 'spam', 'eggs'
+	]::TEXT[]
+);</pre></td>
+	<td>TABLE (index bigint, value text)</td>
+	<td><pre>{1,'foo'}
+{2,'bar'}
+{3,'spam'}
+{4,'eggs'}</pre></td>
+</tr>
+
+<tr>
+	<td><pre>SELECT *
+FROM anyarray_enumerate(
+	ARRAY[
+		ARRAY['foo', 'bar'],
+		ARRAY['spam', 'eggs']
+	]::TEXT[]
+);</pre></td>
+	<td>TABLE (index bigint, value text)</td>
+	<td><pre>{1,'foo'}
+{2,'bar'}
+{3,'spam'}
+{4,'eggs'}</pre></td>
+</tr>
 
 <tr><td><pre>SELECT anyarray_numeric_only(
 	ARRAY['1', '1.1', '1.1a', '1.a', 'a']::text[]

@@ -19,7 +19,7 @@ $BODY$
                 FOR loop_offset IN ARRAY_LOWER(from_array, 1)..ARRAY_UPPER(from_array, 1) LOOP
                         -- If the element being iterated over is in "remove_array",
                         -- do not append it to "return_array".
-                        IF NOT from_array[loop_offset] = ANY(remove_array) THEN
+                        IF (from_array[loop_offset] = ANY(remove_array)) IS DISTINCT FROM TRUE THEN
                                 return_array = ARRAY_APPEND(return_array, from_array[loop_offset]);
                         END IF;
                 END LOOP;

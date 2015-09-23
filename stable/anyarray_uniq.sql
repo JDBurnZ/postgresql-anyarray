@@ -12,6 +12,10 @@ $BODY$
 		IF with_array IS NULL THEN
 			return NULL;
 		END IF;
+		
+		IF with_array = '{}' THEN
+		    return return_array;
+		END IF; 
 
 		-- Iterate over each element in "concat_array".
 		FOR loop_offset IN ARRAY_LOWER(with_array, 1)..ARRAY_UPPER(with_array, 1) LOOP

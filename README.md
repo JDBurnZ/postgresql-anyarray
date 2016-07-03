@@ -68,71 +68,72 @@ examples
 
 <tr><th>Query</th><th>Return Data-Type</th><th>Result</th></tr>
 
-<tr><td><pre>anyarray_concat(
+<tr><td><pre>SELECT anyarray_concat(
 	ARRAY[1, 2],
 	ARRAY[2, 3]
 )</pre></pre></td><td>integer[]</td><td><pre>{1,2,2,3}</pre></td></tr>
 
-<tr><td><pre>anyarray_concat(
+<tr><td><pre>SELECT anyarray_concat(
 	ARRAY['one', 'two'],
 	ARRAY['two', 'three']
 )</pre></td><td>text[]</td><td><pre>{one,two,two,three}</pre></td></tr>
 
-<tr><td><pre>anyarray_concat(
+<tr><td><pre>SELECT anyarray_concat(
 	ARRAY[1, 2],
 	2
 )</pre></td><td>integer[]</td><td><pre>{1,2,2}</pre></td></tr>
 
-<tr><td><pre>anyarray_concat(
+<tr><td><pre>SELECT anyarray_concat(
 	ARRAY['one', 'two'],
 	'two'::text
 )</pre></td><td>text[]</td><td><pre>{one,two,two}</pre></td></tr>
-<tr><td><pre>anyarray_concat_uniq(
+
+<tr><td><pre>SELECT anyarray_concat_uniq(
 	ARRAY[1, 2],
 	ARRAY[2, 3]
 )</pre></td><td>integer[]</td><td><pre>{1,2,3}</pre></td></tr>
 
-<tr><td><pre>anyarray_concat_uniq(
+<tr><td><pre>SELECT anyarray_concat_uniq(
 	ARRAY['one', 'two'],
 	ARRAY['two', 'three']
 )</pre></td><td>text[]</td><td><pre>{one,two,three}</pre></td></tr>
 
-<tr><td><pre>anyarray_concat_uniq(
+<tr><td><pre>SELECT anyarray_concat_uniq(
 	ARRAY[1, 2],
 	2
 )</pre></td><td>integer[]</td><td><pre>{1,2}</pre></td></tr>
 
-<tr><td><pre>anyarray_concat_uniq(
+<tr><td><pre>SELECT anyarray_concat_uniq(
 	ARRAY[1, 2],
 	3
 )</pre></td><td>integer[]</td><td><pre>{1,2,3}</pre></td></tr>
 
-<tr><td><pre>anyarray_concat_uniq(
+<tr><td><pre>SELECT anyarray_concat_uniq(
 	ARRAY['one', 'two'],
 	'two'::text
 )</pre></td><td>text[]</td><td><pre>{one,two}</pre></td></tr>
 
-<tr><td><pre>anyarray_concat_uniq(
+<tr><td><pre>SELECT anyarray_concat_uniq(
 	ARRAY['one', 'two'],
 	'three'::text
 )</pre></td><td>text[]</td><td><pre>{one,two,three}</pre></td></tr>
 
-<tr><td><pre>anyarray_diff(
+<tr><td><pre>SELECT anyarray_diff(
 	ARRAY[1, 1, 2],
 	ARRAY[2, 3, 4, 4]
 )</pre></td><td>integer[]</td><td><pre>{1,1,3,4,4}</pre></td></tr>
 
-<tr><td><pre>anyarray_diff(
+<tr><td><pre>SELECT anyarray_diff(
 	ARRAY['one', 'one', 'two'],
 	ARRAY['two', 'three', 'four', 'four']
 )</pre></td><td>text[]</td><td><pre>{one,one,three,four,four}</pre></td></tr>
 
-<tr><td><pre>anyarray_diff_uniq(
+<tr><td><pre>SELECT anyarray_diff_uniq(
 	ARRAY[1, 1, 2],
 	ARRAY[2, 3, 4, 4]
 )</pre></td><td>integer[]</td><td><pre>{1,3,4}</pre></td></tr>
 
-<tr><td><pre>anyarray_diff_uniq(
+<tr><td><pre>SELECT anyarray_diff_uniq(
 	ARRAY['one', 'one', 'two'],
 	ARRAY['two', 'three', 'four', 'four']
 )</pre></td><td>text[]</td><td><pre>{one,three,four}</pre></td></tr>
@@ -174,51 +175,51 @@ FROM anyarray_enumerate(
 	ARRAY[1, 1.1, 1.1234567890]::numeric[]
 )</pre></td><td>numeric[]</td><td><pre>{1,1.1,1.1234567890}</pre></td></tr>
 
-<tr><td><pre>anyarray_is_array(ARRAY[1, 2])</pre></td><td>boolean[]</td><td><pre>TRUE</pre></td></tr>
+<tr><td><pre>SELECT anyarray_is_array(ARRAY[1, 2])</pre></td><td>boolean[]</td><td><pre>TRUE</pre></td></tr>
 
-<tr><td><pre>anyarray_is_array(ARRAY['one', 'two'])</pre></td><td>boolean[]</td><td><pre>TRUE</pre></td></tr>
+<tr><td><pre>SELECT anyarray_is_array(ARRAY['one', 'two'])</pre></td><td>boolean[]</td><td><pre>TRUE</pre></td></tr>
 
-<tr><td><pre>anyarray_is_array(1)</pre></td><td>boolean[]</td><td><pre>FALSE</pre></td></tr>
+<tr><td><pre>SELECT anyarray_is_array(1)</pre></td><td>boolean[]</td><td><pre>FALSE</pre></td></tr>
 
-<tr><td><pre>anyarray_is_array('one'::text)</pre></td><td>boolean[]</td><td><pre>FALSE</pre></td></tr>
+<tr><td><pre>SELECT anyarray_is_array('one'::text)</pre></td><td>boolean[]</td><td><pre>FALSE</pre></td></tr>
 
-<tr><td><pre>anyarray_ranges(ARRAY[1, 2, 4, 5, 6, 9])</pre></td><td>text[]</td><td><pre>{1-2,4-6,9}</pre></td></tr>
+<tr><td><pre>SELECT anyarray_ranges(ARRAY[1, 2, 4, 5, 6, 9])</pre></td><td>text[]</td><td><pre>{1-2,4-6,9}</pre></td></tr>
 
-<tr><td><pre>anyarray_ranges(ARRAY[1.1, 1.2, 2, 3, 5])</pre></td><td>text[]</td><td><pre>{1.1,1.2,2-3,5}</pre></td></tr>
+<tr><td><pre>SELECT anyarray_ranges(ARRAY[1.1, 1.2, 2, 3, 5])</pre></td><td>text[]</td><td><pre>{1.1,1.2,2-3,5}</pre></td></tr>
 
-<tr><td><pre>anyarray_remove(
+<tr><td><pre>SELECT anyarray_remove(
 	ARRAY[1, 2],
 	ARRAY[2, 3]
 )</pre></td><td>integer[]</td><td><pre>{1}</pre></td></tr>
 
-<tr><td><pre>anyarray_remove(
+<tr><td><pre>SELECT anyarray_remove(
 	ARRAY['one', 'two'],
 	ARRAY['two', 'three']
 )</pre></td><td>text[]</td><td><pre>{one}</pre></td></tr>
 
-<tr><td><pre>anyarray_remove(
+<tr><td><pre>SELECT anyarray_remove(
 	ARRAY[1, 2],
 	2
 )</pre></td><td>integer[]</td><td><pre>{1}</pre></td></tr>
 
-<tr><td><pre>anyarray_remove(
+<tr><td><pre>SELECT anyarray_remove(
 	ARRAY['one', 'two'],
 	'two'::text
 )</pre></td><td>text[]</td><td><pre>{one}</pre></td></tr>
 
-<tr><td><pre>anyarray_remove_null(ARRAY[1, 2, NULL, 4])</pre></td><td>integer[]</td><td><pre>{1,2,4}</pre></td></tr>
+<tr><td><pre>SELECT anyarray_remove_null(ARRAY[1, 2, NULL, 4])</pre></td><td>integer[]</td><td><pre>{1,2,4}</pre></td></tr>
 
-<tr><td><pre>anyarray_remove_null(ARRAY['one', 'two', NULL, 'four'])</pre></td><td>text[]</td><td><pre>{one,two,four}</pre></td></tr>
+<tr><td><pre>SELECT anyarray_remove_null(ARRAY['one', 'two', NULL, 'four'])</pre></td><td>text[]</td><td><pre>{one,two,four}</pre></td></tr>
 
-<tr><td><pre>anyarray_sort(ARRAY[1, 46, 15, 3])</pre></td><td>integer[]</td><td><pre>{1,3,15,46}</pre></td></tr>
+<tr><td><pre>SELECT anyarray_sort(ARRAY[1, 46, 15, 3])</pre></td><td>integer[]</td><td><pre>{1,3,15,46}</pre></td></tr>
 
-<tr><td><pre>anyarray_sort(ARRAY['1', '46', '15', '3'])</pre></td><td>integer[]</td><td><pre>{1,15,3,46}</pre></td></tr>
+<tr><td><pre>SELECT anyarray_sort(ARRAY['1', '46', '15', '3'])</pre></td><td>integer[]</td><td><pre>{1,15,3,46}</pre></td></tr>
 
-<tr><td><pre>anyarray_sort(ARRAY['one', 'forty-six', 'fifteen', 'three'])</pre></td><td>text[]</td><td><pre>{fifteen,forty-six,one,three}</pre></td></tr>
+<tr><td><pre>SELECT anyarray_sort(ARRAY['one', 'forty-six', 'fifteen', 'three'])</pre></td><td>text[]</td><td><pre>{fifteen,forty-six,one,three}</pre></td></tr>
 
-<tr><td><pre>anyarray_uniq(ARRAY[1, 2, 3, 2, 1])</pre></td><td>integer[]</td><td><pre>{1,2,3}</td></tr>
+<tr><td><pre>SELECT anyarray_uniq(ARRAY[1, 2, 3, 2, 1])</pre></td><td>integer[]</td><td><pre>{1,2,3}</td></tr>
 
-<tr><td><pre>anyarray_uniq(ARRAY['one', 'two', 'three', 'two', 'one'])</pre></td><td>text[]</td><td><pre>{one,two,three}</pre></td></tr>
+<tr><td><pre>SELECT anyarray_uniq(ARRAY['one', 'two', 'three', 'two', 'one'])</pre></td><td>text[]</td><td><pre>{one,two,three}</pre></td></tr>
 
 <tr><td><pre>SELECT id, anyarray_agg(list)
 FROM (VALUES

@@ -15,11 +15,20 @@ $BODY$
 		
 		IF with_array = '{}' THEN
 		    return return_array;
-		END IF; 
+		END IF;
 
 		-- Iterate over each element in "concat_array".
 		FOR loop_offset IN ARRAY_LOWER(with_array, 1)..ARRAY_UPPER(with_array, 1) LOOP
-			IF NOT with_array[loop_offset] = ANY(return_array) THEN
+			IF with_array[loop_offset] IS NULL THEN
+				IF NOT EXISTS(
+					SELECT 1 
+					FROM UNNEST(return_array) AS s(a)
+					WHERE a IS NULL
+				) THEN
+					return_array = ARRAY_APPEND(return_array, with_array[loop_offset]);
+				END IF;
+			-- When an array contains a NULL value, ANY() returns NULL instead of FALSE...
+			ELSEIF NOT (with_array[loop_offset] = ANY(return_array)) OR NOT NULL IS DISTINCT FROM (with_array[loop_offset] = ANY(return_array)) THEN
 				return_array = ARRAY_APPEND(return_array, with_array[loop_offset]);
 			END IF;
 		END LOOP;

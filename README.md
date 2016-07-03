@@ -240,18 +240,6 @@ FROM (VALUES
 GROUP BY id</pre></td><td>text, integer[]</td><td><pre>'a', {{1,2},{3,4}}<br/>'b', {{5,6},{7,8}}</pre></td></tr>
 </tbody></table>
 
-to do
------
-
-* Test on PostgreSQL 8.3
-* Implement `anyarray_shift(anyarray)`: Returns the array passed with the first element removed.
-* Implement `anyarray_pop(anyarray)`: Returns the array passed with the last element removed.
-* Implement `anyarray_remove_at(anyarray, offset)`: Returns the array passed with the element at `offset` removed. Should offset start at 1 similar to PostgreSQL's array access, or start at 0 (ordinal) like most programming languages use? Leaning toward ordinal, because that would be assumed functionality unless you already have a solid understanding of PostgreSQL arrays.)
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/JDBurnZ/anyarray/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
-
-
 Donations
 ---------
 AnyArray is free software, but donations help the developer spend more time maintaining this projects and others like it.

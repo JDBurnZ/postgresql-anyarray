@@ -28,7 +28,7 @@ $BODY$
 					return_array = ARRAY_APPEND(return_array, with_array[loop_offset]);
 				END IF;
 			-- When an array contains a NULL value, ANY() returns NULL instead of FALSE...
-			ELSEIF NOT (with_array[loop_offset] = ANY(return_array)) OR NOT NULL IS DISTINCT FROM (with_array[loop_offset] = ANY(return_array)) THEN
+			ELSEIF NOT(with_array[loop_offset] = ANY(return_array)) OR NOT(NULL IS DISTINCT FROM (with_array[loop_offset] = ANY(return_array))) THEN
 				return_array = ARRAY_APPEND(return_array, with_array[loop_offset]);
 			END IF;
 		END LOOP;
